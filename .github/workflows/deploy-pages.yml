@@ -29,10 +29,16 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare static artifact
+        run: |
+          mkdir -p public
+          cp index.html public/index.html
+          touch public/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./public
 
       - name: Deploy to GitHub Pages
         id: deployment
